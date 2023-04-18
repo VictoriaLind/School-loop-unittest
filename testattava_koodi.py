@@ -1,6 +1,6 @@
 #***************************************************** 
 # T1_2_2.py kaytetaan luvun parillisuuden tarkistamiseen.
-# @author tekija: (ensimmaisen version tekija, omat nimikirjaimet) 
+# @author tekija: Victoria
 # @since pvm: (versio pvm 18.4.2023) 
 # @version versio: (versionumero 1.0) 
 # muutos: (nimikirjaimet omat nimikirjaimet) 
@@ -31,36 +31,61 @@
 #12.palauta yksikkotestattu koodi githubin "fork"- toiminnolla opettajalle opettajan repositoriin 
 
 import unittest
-runtest=0
+runtest = 1
 
-def testattava_funktio(funktioparametri):
-    #testattava koodi tulee tahan
-    #muista lisata return- lauseke jos runtest==1
-    paluuarvo='testin tulos jos ok'
+def counter(num):
+    for counter in range(1, num + 1):
+        if (counter % 2) == 0:
+            print(counter)
+            palautusarvo = "on parillinen"
+            print(palautusarvo)
+        else:
+            print(counter)
+            palautusarvo = "on pariton"
+            print(palautusarvo)
+    if runtest == 1:
+        return palautusarvo
 
-    if runtest==1:
-        return paluuarvo
+if runtest == 0:
+    counter(2)
 
-if runtest==0:
-    testattava_funktio(1)
-
-#aja testi kaskylla:
-#python -m testattava_koodi.py
-#luokan nimen tulee olla sama kuin tiedostonnimen (ilman .py paatetta)
-class testattava_koodi(unittest.TestCase):
-    
-    #jos kopioit testeja niin tarkista ettei funktioiden nimet ole samannimisia
-    def test_testattava_funktio_success(self):
-        #suluissa on arvo jolla testia ajetaan
-        actual =  testattava_funktio(1)
-        expected='testin tulos jos ok'
-        try:
+# python -m unittest parillinen_pariton_looppi.py
+class parillinen_pariton_looppi(unittest.TestCase):
+    def test_count_parillinen(self):
+        actual = str(counter(4))
+        expected = 'on parillinen'
+        try: 
             assert actual == expected
-        #jos testi ei mene lapi niin tulostetaan virhe
-        except:
-            print('testin tuloksesa virhe!' + str(actual) + '<>',expected)
+        except:  
+            print('Virhe parittomuuden tarkistamisessa')
 
-
+    def test_count_pariton(self):
+        actual = str(counter(3))
+        expected = 'on pariton'
+        try: 
+            assert actual == expected
+        except:  
+            print('Virhe parittomuuden tarkistamisessa')
             
 
+#- TULOS -#
 
+# 1
+# on pariton
+# 2
+# on parillinen
+# 3
+# on pariton
+# 4
+# on parillinen
+# .1
+# on pariton
+# 2
+# on parillinen
+# 3
+# on pariton
+# .
+# ----------------------------------------------------------------------
+# Ran 2 tests in 0.004s
+
+# OK
